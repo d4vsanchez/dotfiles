@@ -1,0 +1,148 @@
+{
+  // Editor font configuration
+  "editor.tabSize": 2,
+  "editor.letterSpacing": 0.5,
+  "editor.fontWeight": "400",
+  "editor.fontFamily": "'SauceCodePro Nerd Font Mono'",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
+  // Cursor setup
+  "editor.cursorBlinking": "solid",
+  // UI Improvements
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "explorer.confirmDragAndDrop": false,
+  "editor.snippetSuggestions": "top",
+  "editor.tabCompletion": "on",
+  "editor.quickSuggestionsDelay": 0,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.suggestSelection": "first",
+  "editor.wordWrapColumn": 120,
+  "editor.rulers": [120],
+  "breadcrumbs.enabled": true,
+  // Git configuration
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "[git-commit]": {
+    "editor.rulers": [
+      50,
+      72
+    ]
+  },
+  // Whitespace setup
+  "editor.renderWhitespace": "all",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  // Terminal configuration
+  "terminal.integrated.shell.linux": "/usr/bin/zsh",
+  "terminal.integrated.confirmOnExit": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  // Exclusion of files
+  "files.exclude": {
+    "**/.coverage*": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/*.pyc": true,
+    "**/CVS": true
+  },
+  "files.watcherExclude": {
+    "**/.coverage*": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/dist/**": true,
+    "**/htmlcov/**": true,
+    "**/node_modules/**": true
+  },
+  "search.exclude": {
+    "**/.coverage*": true,
+    "**/.pytest_cache/**": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/htmlcov/**": true,
+    "**/node_modules": true
+  },
+  // Python configuration
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintUseMinimalCheckers": true,
+  "python.formatting.provider": "none",
+  "python.linting.pylintArgs": [
+    "--enable=W0614",
+    "--disable=C0114",
+    "--disable=C0115",
+    "--disable=C0116",
+    "--max-line-length=119",
+    "--extension-pkg-whitelist=ujson,lxml",
+    "--load-plugins=pylint_django",
+    "--disable=R0801"
+  ],
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
+  },
+  "vsintellicode.python.completionsEnabled": false,
+  // Django Snippets & Syntax highlight
+  "files.associations": {
+    "**/templates/**/*.html": "django-html"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  // JS Configuration
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[django-html]": {
+    "editor.tabSize": 4
+  },
+  "editor.tokenColorCustomizations": {
+    "[GitHub Sharp Dark]": {
+      "textMateRules": [{
+        "scope": [
+          "comment",
+          "punctuation.definition.comment",
+          "comment.block",
+          "comment.line",
+          "comment.block.documentation",
+          "comment.line.double-slash",
+          "entity.other.attribute-name",
+          "entity.other.attribute-name.html",
+          "markup.italic",
+          "entity.other.attribute-name.id",
+          "entity.other.attribute-name.class.css",
+          "entity.other.attribute-name.tag.jade",
+          "entity.other.attribute-name.class.jade",
+          "entity.other.attribute-name.id.jade",
+          "keyword.control",
+          "storage",
+          "emphasis",
+          "variable.language"
+        ],
+
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }]
+    }
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "python.testing.pytestEnabled": true,
+  "python.jediEnabled": false,
+  "python.testing.pytestArgs": [
+    "--no-cov"
+  ],
+  "files.insertFinalNewline": true,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "editor.cursorStyle": "line-thin",
+  "editor.cursorSmoothCaretAnimation": true,
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "debug.javascript.usePreview": true,
+  "python.insidersChannel": "weekly"
+}
