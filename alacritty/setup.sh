@@ -9,5 +9,4 @@ if ! which alacritty; then
   exit 1
 fi
 
-ln -f alacritty.yml "$HOME/.config/alacritty/alacritty.yml"
-
+ln -sf "$PWD/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
