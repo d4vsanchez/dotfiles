@@ -127,7 +127,6 @@ alias top=btm
 alias grep=rg
 alias cat=bat
 alias sed=sd
-alias vim=nvim
 alias code=code-insiders
 alias c=code-insiders
 alias ls=exa
