@@ -1,9 +1,10 @@
 #!/bin/sh
 
-full_path="$HOME/.tmux.conf"
-if [ -e "$full_path" ]; then
-  preserved="$full_path.$$"
-  mv "$full_path" "$preserved"
-  echo "Preserved $full_path as $preserved"
+if ! which tmux; then
+  echo "Doesn't look like tmux is installed."
+  echo "Be sure to intsall tmux with install-tmux."
+  exit 1
 fi
-cp tmux.conf "$full_path"
+
+ln -f tmux.conf "$HOME/.tmux.conf"
+
