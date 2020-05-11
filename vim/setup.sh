@@ -4,4 +4,4 @@ if ! which vim; then
   exit 1
 fi
 
-ln -sf vimrc $HOME/.vimrc
+ln -sf $PWD/vimrc $HOME/.vimrc
