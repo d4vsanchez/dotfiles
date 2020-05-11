@@ -1,4 +1,6 @@
 #!/bin/sh
 
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+node_v=12
+
+curl -sL "https://deb.nodesource.com/setup_$node_v.x" | sudo -E bash -
 sudo apt-get install -y nodejs

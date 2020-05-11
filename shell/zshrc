@@ -136,3 +136,5 @@ fi
 # Use the default behavior for square brackets instead of using the one from ZSH
 unsetopt nomatch
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
