@@ -34,9 +34,9 @@ call plug#begin('~/.vim/plugged')
   " https://github.com/pangloss/vim-javascript
   Plug 'pangloss/vim-javascript'
 
-  " Vim minimalist schemacolor
-  " https://github.com/dikiaap/minimalist
-  Plug 'dikiaap/minimalist'
+  " Vim gruvbox schemacolor
+  " https://github.com/dikiaap/gruvbox
+  Plug 'morhetz/gruvbox'
 
   " Asynchronous Lint Engine
   " https://github.com/w0rp/ale
@@ -45,6 +45,7 @@ call plug#begin('~/.vim/plugged')
   " YouCompleteMe
   Plug 'ycm-core/YouCompleteMe'
 
+  " Virtual Environment support for Python projects
   Plug 'plytophogy/vim-virtualenv'
 call plug#end()
 
@@ -232,7 +233,6 @@ autocmd WinEnter * setlocal cursorline
 autocmd BufLeave * setlocal nocursorline
 autocmd WinLeave * setlocal nocursorline
 
-colorscheme minimalist
 
 " =================
 " Ale configuration
@@ -254,3 +254,9 @@ let g:ale_fixers = {
 \}
 
 let g:ale_fix_on_save = 1
+
+" Gruvbox theme configuration
+let g:gruvbox_italics=1
+colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark="medium"
