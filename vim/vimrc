@@ -47,6 +47,9 @@ call plug#begin('~/.vim/plugged')
 
   " Virtual Environment support for Python projects
   Plug 'plytophogy/vim-virtualenv'
+
+  " Todo list plugin
+  Plug 'aserebryakov/vim-todo-lists'
 call plug#end()
 
 " Number configuration
@@ -260,3 +263,8 @@ let g:gruvbox_italics=1
 colorscheme gruvbox
 set background=dark
 let g:gruvbox_contrast_dark="medium"
+
+" ============
+" Own commands
+" ============
+command TodoP edit ~/Documents/personal.todo
