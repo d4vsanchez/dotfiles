@@ -1,0 +1,94 @@
+# Detection of interactivility
+
+case $- in
+  *i*) ;; 
+  *) return
+esac
+
+havecmd () {
+  type "$1" &> /dev/null
+  return $?
+}
+# Export the name of the user as a variable
+havecmd git && export GITUSER="$(git config --global user.name)"
+# Configure export variables
+export PATH=\
+$HOME/.local/bin:\
+$HOME/.cargo/bin:\
+$HOME/.poetry/bin:\
+$HOME/.exercism:\
+$HOME/.fzf/bin:\
+/usr/local/bin:\
+/usr/games:\
+/usr/sbin:\
+/usr/bin:\
+/sbin:\
+/bin
+
+set bell-style none
+
+shopt -s checkwinsize
+shopt -s expand_aliases
+shopt -s histappend
+
+# Do not duplicate lines or add lines that starts with space in the history.
+HISTCONTROL=ignoreboth
+HISTSIZE=5000
+HISTFILESIZE=10000
+
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# This is a simple prompt I made for the colorscheme I use daily which is Gruvbox Medium Dark
+
+export rightarrow=$'\302\273'
+
+if [[ $EUID == 0 ]]; then
+  export PS1="\[\033[1;33m\]\u\[\033[0;00m\]@\[\033[0;34m\]\w\[\033[0;00m\] # "
+else
+  export PS1="\[\033[1;33m\]\u\[\033[0;00m\]@\[\033[0;34m\]\w\[\033[0;00m\] $rightarrow T "
+fi
+export EDITOR=vi
+export VISUAL=vi
+export EDITOR_PREFIX=vi
+
+# TODO Add VIMSpell configuration
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+if [ -r /usr/share/bash-completion/bash_completion ]; then
+  source /usr/share/bash-completion/bash_completion
+fi
+unalias -a
+
+alias ls='ls -h --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias ssh-keygen='ssh-keygen -t ed25519'
+
+alias '?'=duck
+alias '??'=google
+
+alias free='free -h'
+alias df='df -h'
+alias top='htop'
+
+alias ipinfo='curl ipinfo.io'
+
+which vim &>/dev/null && alias vi=vim
+
+alias vimpluginstall="vim +':PlugInstall' +':q!' +':q!'"
+
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
+if [ -f $HOME/.fzf.bash ]; then
+  source $HOME/.fzf.bash
+fi
