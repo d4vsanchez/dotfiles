@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
   " vim-airline
   " https://github.com/vim-airline/vim-airline
   Plug 'vim-airline/vim-airline'
@@ -66,7 +66,7 @@ set guicursor=
 " Disable beep / flash
 set vb t_vb=
 
-set guifont="Input Mono":h11
+set guifont="JetBrainsMono Nerd Font Mono":h11
 
 " Set tabs and indents (for JS)
 set ts=2
@@ -242,8 +242,8 @@ autocmd WinLeave * setlocal nocursorline
 " Ale configuration
 " =================
 
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '!'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
