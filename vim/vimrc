@@ -36,7 +36,8 @@ call plug#begin('~/.vim/plugged')
 
   " Vim gruvbox schemacolor
   " https://github.com/dikiaap/gruvbox
-  Plug 'morhetz/gruvbox'
+  Plug 'arcticicestudio/nord-vim'
+
 
   " Asynchronous Lint Engine
   " https://github.com/w0rp/ale
@@ -258,11 +259,8 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 
-" Gruvbox theme configuration
-let g:gruvbox_italics=1
-colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark="medium"
+" Nord theme configuration
+colorscheme nord
 
 " ============
 " Own commands
