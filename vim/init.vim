@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
   " vim-airline
   " https://github.com/vim-airline/vim-airline
@@ -36,7 +42,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Vim gruvbox schemacolor
   " https://github.com/dikiaap/gruvbox
-  Plug 'arcticicestudio/nord-vim'
+  Plug 'morhetz/gruvbox'
 
 
   " Asynchronous Lint Engine
@@ -51,6 +57,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Todo list plugin
   Plug 'aserebryakov/vim-todo-lists'
+
+  " NERDTree
+  " https://github.com/scrooloose/nerdtree
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+  " NERDTree Git Plugin
+  " https://github.com/Xuyuanp/nerdtree-git-plugin
+  Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
 
 " Number configuration
@@ -135,6 +149,9 @@ nnoremap <silent> <leader>sc :source $MYVIMRC<CR>
 " Toggle line numbers
 nnoremap <silent> <leader>n :set number! number?<CR>
 
+" Toggle NERDTree
+nnoremap <silent> <Space> :NERDTreeToggle<CR>
+
 " Toggle line wrap
 nnoremap <silent> <leader>w :set wrap! wrap?<CR>
 
@@ -200,6 +217,7 @@ function! ToggleHiddenAll()
       set noruler
       set laststatus=0
       set noshowcmd
+      NERDTreeClose
       set foldcolumn=10
   else
     set foldcolumn=0
@@ -250,19 +268,34 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint'],
+\  'python': ['pylint'],
 \}
 
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \  'typescript': ['tslint'],
+\  'python': ['black'],
 \}
 
 let g:ale_fix_on_save = 1
 
-" Nord theme configuration
-colorscheme nord
+" =======
+" GruvBox
+" =======
 
-" ============
-" Own commands
-" ============
-command TodoP edit ~/Documents/personal.todo
+let g:gruvbox_contrast_dark="high"
+colorscheme gruvbox
+
+" Autostart NERDTree when opening a directory
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
+
+" Auto start NERD tree if no files are specified
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
+
+" Let quit work as expected if after entering :q the only window left open is NERD Tree itself
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Toggle NERDTree
+nnoremap <silent> <Space> :NERDTreeToggle<CR>
+
