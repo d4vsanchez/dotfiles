@@ -1,10 +1,10 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
 endif
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/.vim/plugged')
   " vim-airline
   " https://github.com/vim-airline/vim-airline
   Plug 'vim-airline/vim-airline'
@@ -284,7 +284,8 @@ let g:ale_fix_on_save = 1
 " =======
 
 let g:gruvbox_contrast_dark="high"
-colorscheme gruvbox
+set background=dark
+autocmd VimEnter * colorscheme gruvbox
 
 " Autostart NERDTree when opening a directory
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
