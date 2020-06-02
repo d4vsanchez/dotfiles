@@ -3,7 +3,7 @@
 export rightarrow=$'\302\273'
 
 if [[ $EUID == 0 ]]; then
-  export PS1="\[\033[1;33m\]\u\[\033[0;00m\]@\[\033[0;34m\]\w\[\033[0;00m\] # "
+  export PS1="\[\u@\w\] # "
 else
-  export PS1="\[\033[1;33m\]\u\[\033[0;00m\]@\[\033[0;34m\]\w\[\033[0;00m\] $rightarrow "
+  export PS1="[\u@\w] $rightarrow "
 fi
