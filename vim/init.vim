@@ -42,7 +42,7 @@ call plug#begin('~/.vim/plugged')
 
   " Vim gruvbox schemacolor
   " https://github.com/dikiaap/gruvbox
-  Plug 'morhetz/gruvbox'
+  Plug 'arcticicestudio/nord-vim'
 
 
   " Asynchronous Lint Engine
@@ -283,9 +283,7 @@ let g:ale_fix_on_save = 1
 " GruvBox
 " =======
 
-let g:gruvbox_contrast_dark="high"
-set background=dark
-autocmd VimEnter * colorscheme gruvbox
+autocmd VimEnter * colorscheme nord
 
 " Autostart NERDTree when opening a directory
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
