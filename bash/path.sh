@@ -3,7 +3,7 @@ export PATH=\
 $HOME/.local/bin:\
 $HOME/.cargo/bin:\
 $HOME/.poetry/bin:\
-$HOME/.exercism:\
+$HOME/.pyenv/bin:\
 $HOME/.fzf/bin:\
 /usr/local/bin:\
 /usr/games:\

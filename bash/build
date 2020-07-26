@@ -11,4 +11,6 @@ cat \
   ./completion.sh \
   ./aliases.sh \
   ./fzf.sh \
+  ./misc.sh \
+  ./grc.sh \
 >| bashrc
