@@ -12,7 +12,6 @@ export NVM_DIR="$HOME/.nvm"
 if ! which starship &> /dev/null ; then
 	echo "Doesn't seem like starship has been installed"
 	echo "Be sure to install starship"
-	exit 1
 fi
 
 eval "$(starship init bash)"
