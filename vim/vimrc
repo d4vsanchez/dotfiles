@@ -8,11 +8,6 @@ call plug#begin('~/.vim/plugged')
   " vim-airline
   " https://github.com/vim-airline/vim-airline
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-
-  " vim-fugitive
-  " https://github.com/tpope/vim-fugitive
-  Plug 'tpope/vim-fugitive'
 
   " editorconfig
   " https://github.com/editorconfig/editorconfig-vim
@@ -28,10 +23,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  " indentline - display thin vertical lines
-  " https://github.com/Yggdroot/indentLine
-  Plug 'Yggdroot/indentLine'
-
   " Syntax highlighting and indenting for JSX
   " https://github.com/mxw/vim-jsx
   Plug 'mxw/vim-jsx'
@@ -40,10 +31,9 @@ call plug#begin('~/.vim/plugged')
   " https://github.com/pangloss/vim-javascript
   Plug 'pangloss/vim-javascript'
 
-  " Vim gruvbox schemacolor
-  " https://github.com/dikiaap/gruvbox
-  Plug 'arcticicestudio/nord-vim'
-
+  " Dracula Theme for Vim
+  " https://github.com/dracula/vim
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
   " Asynchronous Lint Engine
   " https://github.com/w0rp/ale
@@ -61,11 +51,10 @@ call plug#begin('~/.vim/plugged')
   " NERDTree
   " https://github.com/scrooloose/nerdtree
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-
-  " NERDTree Git Plugin
-  " https://github.com/Xuyuanp/nerdtree-git-plugin
-  Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
+
+" Use 24-bit colors
+set termguicolors
 
 " Number configuration
 set number relativenumber
@@ -204,10 +193,15 @@ nnoremap <A-l> <C-w>l
 " ================================
 " Vim Airline status configuration
 " ================================
-let g:airline_theme='monochrome'
-
-" show buffers (if only one tab)
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'dracula'
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline_left_sep = ' »  '
+let g:airline_right_sep = ' « '
+let g:airline_section_warning = ''
+let g:airline_section_y = ''
+let g:airline_section_x = ''
+set laststatus=2 " for airline
 
 let s:hidden_all = 0
 function! ToggleHiddenAll()
@@ -280,10 +274,10 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 " =======
-" GruvBox
+" Dracula
 " =======
+colorscheme dracula
 
-autocmd VimEnter * colorscheme nord
 
 " Autostart NERDTree when opening a directory
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif

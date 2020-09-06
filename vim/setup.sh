@@ -1,8 +1,7 @@
 #!/bin/sh
-if ! which nvim; then
-  echo "Doesn't look like Neovim is installed in your system."
+if ! which vim; then
+  echo "Doesn't look like vim is installed in your system."
   exit 1
 fi
 
-mkdir -p $HOME/.config/nvim
-ln -sf $PWD/vimrc $HOME/.config/nvim/init.vim
+ln -sf $PWD/vimrc $HOME/.vimrc
