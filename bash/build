@@ -12,5 +12,4 @@ cat \
   ./aliases.sh \
   ./fzf.sh \
   ./misc.sh \
-  ./grc.sh \
 >| bashrc

@@ -1,10 +1,10 @@
 # Configure export variables
 export PATH=\
-$HOME/.local/bin:\
 $HOME/.cargo/bin:\
 $HOME/.poetry/bin:\
 $HOME/.pyenv/bin:\
 $HOME/.fzf/bin:\
+$HOME/.node/bin:\
 /usr/local/bin:\
 /usr/games:\
 /usr/sbin:\
