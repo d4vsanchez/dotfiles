@@ -5,5 +5,5 @@ export rightarrow=$'\302\273'
 if [[ $EUID == 0 ]]; then
   export PS1="\[\u@\w\] # "
 else
-  export PS1="[\u@\w] $rightarrow "
+  export PS1="\e[0;49;94m\u@\w $rightarrow \e[m"
 fi
