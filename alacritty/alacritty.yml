@@ -9,12 +9,12 @@ window:
 # Font configuration
 font:
   normal:
-    family: "JetBrainsMono"
+    family: "DroidSansMono Nerd Font Mono"
   bold:
-    family: "JetBrainsMono"
+    family: "DroidSansMono Nerd Font Mono"
   italic:
-    family: "JetBrainsMono"
-  size: 11.0
+    family: "DroidSansMono Nerd Font Mono"
+  size: 10.0
   offset:
     x: 0
     y: 0
