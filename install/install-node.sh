@@ -1,6 +1,6 @@
 #!/bin/sh
 
-current_lts=v12.18.4
+current_lts=v12.19.0
 
 download () {
   echo -n "Downloading NodeJS..."
