@@ -1,5 +1,6 @@
 # Configure export variables
 export PATH=\
+$HOME/.deno/bin:\
 $HOME/.cargo/bin:\
 $HOME/.poetry/bin:\
 $HOME/.pyenv/bin:\
