@@ -9,11 +9,11 @@ window:
 # Font configuration
 font:
   normal:
-    family: "DroidSansMono Nerd Font Mono"
+    family: "Fira Code"
   bold:
-    family: "DroidSansMono Nerd Font Mono"
+    family: "Fira Code"
   italic:
-    family: "DroidSansMono Nerd Font Mono"
+    family: "Fira Code"
   size: 10.0
   offset:
     x: 0
@@ -27,7 +27,8 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x1d2021'
+    # background: '0x1d2021'
+    background: '0x2c2c2c'
     foreground: '0xd5c4a1'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
