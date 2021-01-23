@@ -1,20 +1,17 @@
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.npm/bin:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$PATH:$HOME/.n/bin"
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME='minimal'
 
-export NVM_SYMLINK_CURRENT=true
-plugins=(debian django docker git git-extras node npm npx zsh-autosuggestions nvm)
+plugins=(debian django docker git git-extras node npm npx zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR='vim'
 
 # General aliases
-alias browser='google-chrome'
+alias browser='firefox'
 
 # Git aliases
 # Thanks @strager (https://github.com/strager/dotfiles/blob/master/zsh/strager/strager_define_git_scm_aliases)
@@ -33,16 +30,9 @@ alias free="free -h"
 alias df="df -h"
 alias ipinfo="curl ipinfo.io"
 
+unsetopt nomatch
+
 # Tilix configuration
 if [[ $TILIX_ID ]]; then
     source /etc/profile.d/vte.sh
 fi
-
-# PyEnv
-if [[ -z "$VIRTUAL_ENV" ]]; then
-  export PATH="$HOME/.pyenv/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
-
-unsetopt nomatch
-
