@@ -1,4 +1,5 @@
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.n/bin"
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -29,6 +30,14 @@ alias ssh-keygen="ssh-keygen -t ed25519"
 alias free="free -h"
 alias df="df -h"
 alias ipinfo="curl ipinfo.io"
+
+# Replace default Coreutils with Rust tools
+alias find="fd"
+alias htop="btm"
+alias grep="rg"
+alias cat="bat"
+alias sed="sd"
+alias ls="exa"
 
 unsetopt nomatch
 
