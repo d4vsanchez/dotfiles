@@ -19,7 +19,11 @@ echo "✅ Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "✅ Installing Brew stuff"
-brew install git tig ripgrep imagemagick watchman tree bat zsh vim tmux
+brew install git tig imagemagick watchman tree zsh vim tmux cmake
+
+echo "✅ Installing Rust coreutils alternatives"
+brew tap clementtsang/bottom
+brew install ripgrep bat bottom sd exa fd git-delta
 
 echo "✅ Installing NodeJS (using N)"
 export N_PREFIX=$HOME/.n
@@ -40,7 +44,9 @@ brew install --cask alfred google-chrome firefox brave-browser bettertouchtool v
 vlc discord zoomus betterzip qlcolorcode qlmarkdown quicklook-json spotify slack docker notion telegram calibre
 
 echo "✅ Cloning dotfiles"
-git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
+if ! [ -d "$HOME/dotfiles" ]; then
+  git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
+fi
 ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
