@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+# Run without downloading
+# curl https://raw.githubusercontent.com/d4vsanchez/dotfiles/master/.linux | bash
+
+install_deb_pkg () {
+    curl -o "/tmp/$1" $2
+    sudo dpkg -i /tmp/$1
+}
+
+install_brave () {
+    sudo apt install -y apt-transport-https curl gnupg
+    curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt update
+    sudo apt install -y brave-browser
+}
+
+install_docker () {
+    # Thanks to Docker Docs: https://docs.docker.com/engine/install/ubuntu/
+    sudo apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt -y install docker-ce docker-ce-cli containerd.io
+    sudo usermod -aG docker $USER
+}
+
+# Ask for the administrator password
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+if ! [ -x "$(command -v apt)" ]; then
+    echo "apt command not found"
+    echo "This script was made for a Debian based distro. Sorry about that :("
+    exit 127
+fi
+
+echo "Hello $(whoami)! Let's start installing tools."
+
+echo "✓ Creating mkdir -p ${HOME}/workspace"
+mkdir -p "${HOME}/workspace"
+
+echo "✓ Fetching the latest info of the repos"
+sudo apt update
+
+echo "✓ Installing useful CLI tools"
+sudo apt install -y curl git tig git-extras tig imagemagick tree vim tmux zsh openvpn network-manager-openvpn-gnome
+
+echo "✓ Installing fonts"
+sudo apt install -y fonts-firacode
+
+echo "✓ Installing Rust"
+curl  --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+echo "✓ Installing Rust toolchain tools"
+export PATH=$PATH:$HOME/.cargo/bin
+cargo install bat bottom sd exa ripgrep fd-find git-delta
+
+echo "✓ Installing NodeJS (using N)"
+export N_PREFIX=$HOME/.n
+curl -L https://git.io/n-install | bash -s -- -y lts
+export PATH="$PATH:$N_PREFIX/bin"
+
+echo "(i) Node installed: $(node --version)"
+echo "(i) NPM installed: $(npm --version)"
+
+echo "✓ Installing a few global npm packages"
+npm install --global yarn tldr vercel spoof castnow typescript
+
+echo "✓ Install Oh My ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+echo "✓ Installing programs"
+sudo apt install -y alacritty jq gnome-tweaks gnome-sushi vlc unzip
+
+install_deb_pkg google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+install_deb_pkg vscode.deb https://az764295.vo.msecnd.net/stable/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/code_1.52.1-1608136922_amd64.deb
+install_deb_pkg slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb
+install_brave
+install_docker
+
+echo "✓ Cloning dotfiles"
+git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
+ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
+ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
+ln -sf "${HOME}/dotfiles/.vimrc" "${HOME}/.vimrc"
+
+echo "✓ Configuring bat"
+mkdir -p "${HOME}/.config/bat/themes"
+ln -sf "${HOME}/dotfiles/.config/bat/config" "${HOME}/.config/bat/config"
+bat cache --build
+
+echo "✓ Configuring zsh"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+ln -sf "${HOME}/dotfiles/.oh-my-zsh/custom/themes/minimal.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/minimal.zsh-theme"
+sudo chsh -s $(which zsh) $USER
+
+echo "✓ Configuring tmux"
+ln -sf "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+echo "✓ Configuring Alacritty"
+mkdir -p "${HOME}/.config/alacritty"
+ln -sf "${HOME}/dotfiles/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+
+if [ -x "$(command -v kernelstub)" ]; then
+    printf "✓ Disabling mitigations\n\tTo enable them again run:\n\t\tsudo kernelstub -d mitigations=off\n"
+    sudo kernelstub -a mitigations=off
+fi
+
+echo "Done. Please restart your system to apply all changes"
