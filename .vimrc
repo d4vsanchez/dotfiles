@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
   " vim-airline
   " https://github.com/vim-airline/vim-airline
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " editorconfig
   " https://github.com/editorconfig/editorconfig-vim
@@ -31,9 +32,8 @@ call plug#begin('~/.vim/plugged')
   " https://github.com/pangloss/vim-javascript
   Plug 'pangloss/vim-javascript'
 
-  " Dracula Theme for Vim
-  " https://github.com/dracula/vim
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  " https://github.com/chriskempson/base16-vim
+  Plug 'chriskempson/base16-vim'
 
   " Asynchronous Lint Engine
   " https://github.com/w0rp/ale
@@ -69,7 +69,7 @@ set guicursor=
 " Disable beep / flash
 set vb t_vb=
 
-set guifont="JetBrainsMono Nerd Font Mono":h11
+set guifont="Fira Code":h11
 
 " Set tabs and indents (for JS)
 set ts=2
@@ -193,7 +193,7 @@ nnoremap <A-l> <C-w>l
 " ================================
 " Vim Airline status configuration
 " ================================
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline_left_sep = ' »  '
@@ -266,7 +266,8 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\  'javascript': ['eslint'],
+\  'javascript': ['prettier'],
+\  'css': ['prettier'],
 \  'typescript': ['tslint'],
 \  'python': ['black'],
 \}
@@ -274,9 +275,9 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 " =======
-" Dracula
+" Gruvbox
 " =======
-colorscheme dracula
+colorscheme base16-gruvbox-dark-medium
 
 
 " Autostart NERDTree when opening a directory
