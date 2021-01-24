@@ -32,12 +32,12 @@ alias df="df -h"
 alias ipinfo="curl ipinfo.io"
 
 # Replace default Coreutils with Rust tools
-alias find="fd"
-alias htop="btm"
-alias grep="rg"
-alias cat="bat"
-alias sed="sd"
-alias ls="exa"
+[[ -x "$(command -v fd)" ]] && alias find="fd"
+[[ -x "$(command -v btm)" ]] && alias htop="btm"
+[[ -x "$(command -v rg)" ]] && alias grep="rg"
+[[ -x "$(command -v bat)" ]] && alias cat="bat"
+[[ -x "$(command -v sd)" ]] && alias sed="sd"
+[[ -x "$(command -v exa)" ]] && alias ls="exa"
 
 unsetopt nomatch
 
