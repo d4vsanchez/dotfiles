@@ -56,6 +56,9 @@ call plug#end()
 " Use 24-bit colors
 set termguicolors
 
+" Some backspace configuration needed for macOS
+set backspace=indent,eol,start
+
 " Number configuration
 set number relativenumber
 
@@ -277,7 +280,7 @@ let g:ale_fix_on_save = 1
 " =======
 " Gruvbox
 " =======
-colorscheme base16-gruvbox-dark-medium
+colorscheme base16-material-darker
 
 
 " Autostart NERDTree when opening a directory
