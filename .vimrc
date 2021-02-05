@@ -19,6 +19,10 @@ call plug#begin('~/.vim/plugged')
   " (must have ack installed: sudo apt install ack-grep)
   Plug 'mileszs/ack.vim'
 
+  " vim-fugitive - git information on Vim
+  " https://github.com/tpope/vim-fugitive
+  Plug 'tpope/vim-fugitive'
+
   " fzf - better fuzzy search and blazing fast grep
   " https://github.com/junegunn/fzf.vim
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -196,11 +200,10 @@ nnoremap <A-l> <C-w>l
 " ================================
 " Vim Airline status configuration
 " ================================
-let g:airline_theme = 'base16_gruvbox_dark_hard'
-let g:airline#extensions#tabline#enabled = 0
+let g:airline_theme = 'minimalist'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#branch#enabled = 1
-let g:airline_left_sep = ' »  '
-let g:airline_right_sep = ' « '
 let g:airline_section_warning = ''
 let g:airline_section_y = ''
 let g:airline_section_x = ''
