@@ -46,7 +46,7 @@ echo "✓ Fetching the latest info of the repos"
 sudo apt update
 
 echo "✓ Installing useful CLI tools"
-sudo apt install -y curl git tig git-extras tig imagemagick tree vim tmux zsh openvpn network-manager-openvpn-gnome
+sudo apt install -y curl git tig git-extras tig imagemagick tree nvim tmux zsh openvpn network-manager-openvpn-gnome
 
 echo "✓ Installing fonts"
 sudo apt install -y fonts-firacode
@@ -83,10 +83,11 @@ install_docker
 
 echo "✓ Cloning dotfiles"
 git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
+mkdir -p "${HOME}/.config/nvim"
 ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -sf "${HOME}/dotfiles/.vimrc" "${HOME}/.vimrc"
+ln -sf "${HOME}/dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
 echo "✓ Configuring bat"
 mkdir -p "${HOME}/.config/bat/themes"
