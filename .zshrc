@@ -5,7 +5,7 @@ export PATH="$PATH:$HOME/.n/bin"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME='minimal'
 
-plugins=(debian django docker git git-extras node npm npx zsh-autosuggestions)
+plugins=(debian django docker git git-extras node npm zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
