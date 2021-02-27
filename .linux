@@ -3,33 +3,27 @@
 # Run without downloading
 # curl https://raw.githubusercontent.com/d4vsanchez/dotfiles/master/.linux | bash
 
-install_deb_pkg () {
-    curl -o "/tmp/$1" $2
-    sudo dpkg -i /tmp/$1
-}
-
 install_brave () {
-    sudo apt install -y apt-transport-https curl gnupg
-    curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-    sudo apt update
-    sudo apt install -y brave-browser
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    sudo dnf install brave-browser
 }
 
 install_docker () {
-    # You can read about how to make this work in Ubuntu/Linux Mint in my blog post:
-    # https://dev.to/d4vsanchez/install-docker-community-edition-in-linux-mint-2gl4
-    sudo apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    UBUNTU_CODENAME=$(grep "UBUNTU_CODENAME" /etc/os-release | awk -F '=' '{ print $2 }')
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $UBUNTU_CODENAME stable"
-    sudo apt -y install docker-ce docker-ce-cli containerd.io
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf -y install docker-ce docker-ce-cli containerd.io
     sudo usermod -aG docker $USER
+    # Install Docker Compose as well
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 }
 
 build_bashrc () {
   BASH_DIR=${HOME}/dotfiles/bash
-  make -C $BASH_DIR 
+  make -C $BASH_DIR
   make install -C $BASH_DIR
   make clean -C $BASH_DIR
 }
@@ -40,9 +34,9 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-if ! [ -x "$(command -v apt)" ]; then
-    echo "apt command not found"
-    echo "This script was made for a Debian based distro. Sorry about that :("
+if ! [ -x "$(command -v dnf)" ]; then
+    echo "dnf command not found"
+    echo "This script was made for a RHEL based distro. Sorry about that :("
     exit 127
 fi
 
@@ -52,13 +46,13 @@ echo "✓ Creating mkdir -p ${HOME}/workspace"
 mkdir -p "${HOME}/workspace"
 
 echo "✓ Fetching the latest info of the repos"
-sudo apt update
+sudo dnf update
 
 echo "✓ Installing useful CLI tools"
-sudo apt install -y curl git tig git-extras tig imagemagick tree neovim tmux zsh openvpn network-manager-openvpn-gnome
+sudo dnf install -y curl git tig git-extras tig ImageMagick tree vim-enhanced tmux zsh
 
 echo "✓ Installing fonts"
-sudo apt install -y fonts-firacode
+sudo dnf install -y fira-code-fonts
 
 echo "✓ Installing Rust"
 curl  --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -78,9 +72,6 @@ echo "(i) NPM installed: $(npm --version)"
 echo "✓ Installing a few global npm packages"
 npm install --global yarn tldr vercel spoof castnow typescript
 
-echo "✓ Installing programs"
-sudo apt install -y terminator jq vlc unzip
-
 echo "✓ Cloning dotfiles"
 git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
 mkdir -p "${HOME}/.config/nvim"
@@ -88,12 +79,10 @@ ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
 ln -sf "${HOME}/dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
-install_deb_pkg google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-install_deb_pkg vscode.deb https://az764295.vo.msecnd.net/stable/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/code_1.52.1-1608136922_amd64.deb
 install_brave
 install_docker
 
-echo "✓ Configuring bash" 
+echo "✓ Configuring bash"
 build_bashrc
 
 echo "✓ Configuring bat"
