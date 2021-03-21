@@ -19,7 +19,7 @@ echo "✅ Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "✅ Installing Brew stuff"
-brew install git tig imagemagick watchman tree zsh neovim tmux cmake
+brew install git tig imagemagick watchman tree zsh vim tmux cmake
 
 echo "✅ Installing Rust coreutils alternatives"
 brew tap clementtsang/bottom
@@ -40,20 +40,18 @@ echo "✅ Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 echo "✅ Installing apps with Brew cask"
-brew install --cask alfred google-chrome firefox brave-browser bettertouchtool visual-studio-code 1password dash \
-vlc discord zoomus betterzip qlcolorcode qlmarkdown quicklook-json spotify slack docker notion telegram calibre
+brew install --cask alfred google-chrome firefox brave-browser visual-studio-code 1password vlc discord betterzip \
+qlcolorcode qlmarkdown quicklook-json spotify slack docker notion telegram ticktick
 
 echo "✅ Cloning dotfiles"
 if ! [ -d "$HOME/dotfiles" ]; then
   git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
 fi
-mkdir -p "${HOME}/.config/nvim"
 
 ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
 ln -sf "${HOME}/dotfiles/.vimrc" "${HOME}/.vimrc"
-ln -sf "${HOME}/dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
 echo "✅ Configuring bat"
 mkdir -p "${HOME}/.config/bat/themes"
@@ -62,7 +60,6 @@ bat cache --build
 
 echo "✅ Configuring zsh"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-ln -sf "${HOME}/dotfiles/.oh-my-zsh/custom/themes/minimal.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/minimal.zsh-theme"
 
 echo "✅ Configuring tmux"
 ln -sf "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"

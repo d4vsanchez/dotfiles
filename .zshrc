@@ -41,7 +41,6 @@ alias ipinfo="curl ipinfo.io"
 
 unsetopt nomatch
 
-# Tilix configuration
-if [[ $TILIX_ID ]]; then
-    source /etc/profile.d/vte.sh
+if [ -x "$(command -v rbenv)" ]; then
+    eval "$(rbenv init -)"
 fi
