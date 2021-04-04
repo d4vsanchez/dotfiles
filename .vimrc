@@ -133,7 +133,8 @@ let g:ale_linters = {
 " FZF Configuration
 " =================
 
-nnoremap <Leader>p :Files<CR>
+nnoremap <silent> <Leader>p :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
 
 " =========================
 " Vim Airline Configuration
