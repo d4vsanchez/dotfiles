@@ -44,3 +44,5 @@ unsetopt nomatch
 if [ -x "$(command -v rbenv)" ]; then
     eval "$(rbenv init -)"
 fi
+
+export FZF_DEFAULT_COMMAND='rg --files -g "!Library/"'
