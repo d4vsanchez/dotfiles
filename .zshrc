@@ -1,18 +1,20 @@
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.n/bin"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME='minimal'
 
-plugins=(debian django docker git git-extras node npm zsh-autosuggestions)
+plugins=(evalcache git git-extras node npm)
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim'
+_evalcache rbenv init -
+_evalcache pyenv init -
 
-# General aliases
-alias browser='firefox'
+export EDITOR='vim'
 
 # Git aliases
 # Thanks @strager (https://github.com/strager/dotfiles/blob/master/zsh/strager/strager_define_git_scm_aliases)
@@ -41,8 +43,9 @@ alias ipinfo="curl ipinfo.io"
 
 unsetopt nomatch
 
-if [ -x "$(command -v rbenv)" ]; then
-    eval "$(rbenv init -)"
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
 fi
-
-export FZF_DEFAULT_COMMAND='rg --files -g "!Library/"'

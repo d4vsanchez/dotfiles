@@ -59,7 +59,7 @@ ln -sf "${HOME}/dotfiles/.config/bat/config" "${HOME}/.config/bat/config"
 bat cache --build
 
 echo "✅ Configuring zsh"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:~/.oh-my-zsh/custom}/plugins/evalcache
 
 echo "✅ Configuring tmux"
 ln -sf "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
