@@ -126,8 +126,15 @@ inoremap <silent><expr> <c-space> coc#refresh()
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'ruby': ['rubocop'],
-\   'python': ['flake8', 'pylint']
+\   'python': ['pylint']
 \}
+
+" Set the fixers
+let g:ale_fixers = {
+\   '*': ['trim_whitespace'],
+\}
+
+let g:ale_fix_on_save = 1
 
 " =================
 " FZF Configuration
