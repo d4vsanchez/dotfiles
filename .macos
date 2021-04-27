@@ -26,9 +26,9 @@ brew tap clementtsang/bottom
 brew install ripgrep bat bottom sd exa fd git-delta
 
 echo "✅ Installing NodeJS (using N)"
-export N_PREFIX=$HOME/.n
-curl -L https://git.io/n-install | bash -s -- -y lts
-export PATH="$PATH:$N_PREFIX/bin"
+export VOLTA_HOME=$HOME/.volta
+export PATH="$PATH:$VOLTA_HOME/bin"
+curl https://get.volta.sh | bash
 
 echo "ℹ️ Node installed: $(node --version)"
 echo "ℹ️ NPM installed: $(npm --version)"
