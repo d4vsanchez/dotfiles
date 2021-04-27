@@ -48,10 +48,12 @@ if ! [ -d "$HOME/dotfiles" ]; then
   git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
 fi
 
+mkdir -p "${HOME}/.config/nvim"
+
 ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -sf "${HOME}/dotfiles/.vimrc" "${HOME}/.vimrc"
+ln -sf "${HOME}/dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
 echo "✅ Configuring bat"
 mkdir -p "${HOME}/.config/bat/themes"

@@ -1,3 +1,5 @@
+export TERM=screen-256color
+
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.n/bin"
