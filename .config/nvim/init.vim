@@ -12,11 +12,8 @@ call plug#begin('~/.vim/plugged')
     " Set the file's root directory (the one with .git) as cwd
     Plug 'airblade/vim-rooter'
 
-    " This is the theme of my preference: One Dark Pro.
-    Plug 'joshdick/onedark.vim'
-
-    " This is a package that's recommended by One Dark Pro, improve syntax
-    " highlighting for multiple packages.
+    " This is the theme of my preference: Material Darker.
+    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
     Plug 'sheerun/vim-polyglot'
 
     " This is a plugin to support EditorConfig
@@ -46,8 +43,16 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
+" Use comma to move between panes
+nnoremap <silent> <Leader><Left> :bp<CR>
+nnoremap <silent> <Leader><Right> :bn<CR>
+nnoremap <silent> <Leader>w :bdelete<CR>
+
 " Set the <Leader> character as comma
 let mapleader=','
+
+" Keep the mouse cursor that is default for the terminal emulator
+set guicursor=
 
 " Set the font of the gui
 set guifont=Hack\ Nerd\ Font\ Mono:h13
@@ -67,10 +72,11 @@ if (empty($TMUX))
   endif
 endif
 
-" Activate the One Dark Pro theme
+" Activate the Material Darker theme
 syntax on
-let g:onedark_hide_endofbuffer = 1 " Hide some ~ characters added by the theme
-colorscheme onedark
+let g:material_theme_style = 'darker'
+let g:material_terminal_italics = 1
+colorscheme material
 
 " Use spaces instead of tabs, always
 " tabstop -> The width of a tab character measured in spaces.
@@ -142,6 +148,7 @@ let g:ale_fix_on_save = 1
 " =================
 
 nnoremap <silent> <Leader>p :Files<CR>
+nnoremap <silent> <Leader>P :GitFiles<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 
 " =========================
