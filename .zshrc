@@ -1,5 +1,3 @@
-export TERM=screen-256color
-
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.n/bin"
@@ -19,7 +17,9 @@ source $ZSH/oh-my-zsh.sh
 _evalcache rbenv init -
 _evalcache pyenv init -
 
-export EDITOR='vim'
+export EDITOR='nvim'
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Git aliases
 # Thanks @strager (https://github.com/strager/dotfiles/blob/master/zsh/strager/strager_define_git_scm_aliases)
