@@ -1,21 +1,18 @@
+export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.n/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.pyenv/bin:$PATH"
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME='minimal'
+export ZSH=$HOME/.oh-my-zsh
 
 plugins=(evalcache git git-extras node npm)
 
 source $ZSH/oh-my-zsh.sh
 
 _evalcache rbenv init -
-_evalcache pyenv init -
 
 export EDITOR='nvim'
 export LANG=en_US.UTF-8
@@ -33,6 +30,7 @@ alias grc="git rebase --continue"
 alias gal="git add --all"
 alias ga="git commit --amend --reuse-messsage=HEAD"
 
+alias vim="nvim"
 alias ssh-keygen="ssh-keygen -t ed25519"
 alias free="free -h"
 alias df="df -h"
@@ -45,12 +43,3 @@ alias ipinfo="curl ipinfo.io"
 [[ -x "$(command -v bat)" ]] && alias cat="bat"
 [[ -x "$(command -v sd)" ]] && alias sed="sd"
 [[ -x "$(command -v exa)" ]] && alias ls="exa"
-
-unsetopt nomatch
-
-autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
-  compinit
-else
-  compinit -C
-fi
