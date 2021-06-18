@@ -13,19 +13,23 @@ sudo -v
 echo "Hello $(whoami)! Let's start installing tools."
 
 echo "✅ Create mkdir -p ${HOME}/workspace"
-mkdir -p "${HOME}/workspace"
+mkdir -p "${HOME}/Workspace"
 
 echo "✅ Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "✅ Installing Brew stuff"
-brew install git tig imagemagick watchman tree zsh vim tmux cmake
+brew install git tig imagemagick watchman tree zsh neovim tmux cmake rbenv
 
 echo "✅ Installing Rust coreutils alternatives"
 brew tap clementtsang/bottom
 brew install ripgrep bat bottom sd exa fd git-delta
 
-echo "✅ Installing NodeJS (using N)"
+echo "✅ Intalling Dev Fonts (Hack)"
+brew tap homebrew/cask-fonts
+brew install font-hack
+
+echo "✅ Installing NodeJS (using Volta)"
 export VOLTA_HOME=$HOME/.volta
 export PATH="$PATH:$VOLTA_HOME/bin"
 curl https://get.volta.sh | bash
@@ -41,11 +45,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 echo "✅ Installing apps with Brew cask"
 brew install --cask alfred google-chrome firefox brave-browser visual-studio-code 1password vlc discord betterzip \
-qlcolorcode qlmarkdown quicklook-json spotify slack docker notion telegram ticktick
+spotify slack docker notion telegram mullvadvpn zoom
 
 echo "✅ Cloning dotfiles"
-if ! [ -d "$HOME/dotfiles" ]; then
-  git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/dotfiles"
+if ! [ -d "$HOME/.dotfiles" ]; then
+  git clone https://github.com/d4vsanchez/dotfiles.git "${HOME}/.dotfiles"
 fi
 
 mkdir -p "${HOME}/.config/nvim"
@@ -66,169 +70,4 @@ git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:~/.oh-my-zsh/custom}/p
 echo "✅ Configuring tmux"
 ln -sf "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 
-#####################
-# macOS Configuration
-#####################
-
-# Set standby delay to 24 hours
-sudo pmset -a standbydelay 86400
-
-# Expand save panel by default
-sudo defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-sudo defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-
-# Expand print panel by default
-sudo defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-sudo defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-
-# Save to disk, not iCloud, by default
-sudo defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
-# Automatically quit printer app once the print jobs complete
-sudo defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-# Disable the “Are you sure you want to open this application?” dialog
-sudo defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-
-# Disable the crash reporter
-sudo defaults write com.apple.CrashReporter DialogType -string "none"
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# Disable automatic capitalization
-sudo defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-
-# Disable smart dashes
-sudo defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-# Disable automatic period substitution
-sudo defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-
-# Disable smart quotes
-sudo defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
-# Disable auto-correct
-sudo defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Trackpad: enable tap to click for this user and for the login screen
-sudo defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-sudo defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-sudo defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# Enable three finger drag on trackpad
-sudo defaults write http://com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
-sudo defaults write http://com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
-
-# Disable press-and-hold for keys in favor of key repeat
-sudo defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Set a blazingly fast keyboard repeat rate
-sudo defaults write NSGlobalDomain KeyRepeat -int 1
-sudo defaults write NSGlobalDomain InitialKeyRepeat -int 10
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-sudo defaults write com.apple.screencapture type -string "png"
-
-# Enable subpixel font rendering on non-Apple LCDs
-# Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
-sudo defaults write NSGlobalDomain AppleFontSmoothing -int 1
-
-# Enable HiDPI display modes (requires restart)
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-
-# Finder: Keep folders on top when sorting by name
-sudo defaults write com.apple.finder _FXSortFoldersFirst -bool true
-
-# Finder: Avoid creating .DS_Store files on network or USB volumes
-sudo defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-sudo defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Use column view in all Finder windows by default
-sudo defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
-
-# Enable AirDrop over Ethernet and on unsupported Macs running Lion
-sudo defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-# Show the ~/Library folder
-chflags nohidden ~/Library
-
-# Show the /Volumes folder
-sudo chflags nohidden /Volumes
-
-# Change minimize/maximize window effect
-sudo defaults write com.apple.dock mineffect -string "scale"
-
-# Wipe all (default) app icons from the Dock
-# This is only really useful when setting up a new Mac, or if you don’t use
-# the Dock to launch apps.
-sudo defaults write com.apple.dock persistent-apps -array
-
-# Show only open applications in the Dock
-sudo defaults write com.apple.dock static-only -bool true
-
-# Automatically hide and show the Dock
-sudo defaults write com.apple.dock autohide -bool true
-
-# Make Dock icons of hidden applications translucent
-sudo defaults write com.apple.dock showhidden -bool true
-
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-
-# Change indexing order and disable some search results
-sudo defaults write com.apple.spotlight orderedItems -array \
-  '{"enabled" = 1;"name" = "APPLICATIONS";}' \
-  '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-  '{"enabled" = 1;"name" = "DIRECTORIES";}' \
-  '{"enabled" = 1;"name" = "PDF";}' \
-  '{"enabled" = 1;"name" = "FONTS";}' \
-  '{"enabled" = 0;"name" = "DOCUMENTS";}' \
-  '{"enabled" = 0;"name" = "MESSAGES";}' \
-  '{"enabled" = 0;"name" = "CONTACT";}' \
-  '{"enabled" = 0;"name" = "EVENT_TODO";}' \
-  '{"enabled" = 0;"name" = "IMAGES";}' \
-  '{"enabled" = 0;"name" = "BOOKMARKS";}' \
-  '{"enabled" = 0;"name" = "MUSIC";}' \
-  '{"enabled" = 0;"name" = "MOVIES";}' \
-  '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-  '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-  '{"enabled" = 0;"name" = "SOURCE";}' \
-# Load new settings before rebuilding the index
-killall mds > /dev/null 2>&1
-# Make sure indexing is enabled for the main volume
-sudo mdutil -i on / > /dev/null
-# Rebuild the index from scratch
-sudo mdutil -E / > /dev/null
-
-# Only use UTF-8 in Terminal.app
-sudo defaults write com.apple.terminal StringEncodings -array 4
-
-# Enable Secure Keyboard Entry in Terminal.app
-# See: https://security.stackexchange.com/a/47786/8918
-sudo defaults write com.apple.terminal SecureKeyboardEntry -bool true
-
-# Disable the line marks
-sudo defaults write com.apple.Terminal ShowLineMarks -int 0
-
-for app in "Activity Monitor" \
-  "Address Book" \
-  "Calendar" \
-  "cfprefsd" \
-  "Contacts" \
-  "Dock" \
-  "Finder" \
-  "Mail" \
-  "Messages" \
-  "Photos" \
-  "Safari" \
-  "SystemUIServer" \
-  "iCal"; do
-  killall "${app}" &> /dev/null
-done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
