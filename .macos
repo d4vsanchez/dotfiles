@@ -44,7 +44,7 @@ echo "✅ Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 echo "✅ Installing apps with Brew cask"
-brew install --cask alfred google-chrome firefox brave-browser visual-studio-code 1password vlc discord betterzip \
+brew install --cask alfred firefox brave-browser visual-studio-code 1password vlc discord betterzip \
 spotify slack docker notion telegram mullvadvpn zoom
 
 echo "✅ Cloning dotfiles"
