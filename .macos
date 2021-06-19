@@ -33,6 +33,8 @@ echo "✅ Installing NodeJS (using Volta)"
 export VOLTA_HOME=$HOME/.volta
 export PATH="$PATH:$VOLTA_HOME/bin"
 curl https://get.volta.sh | bash
+# Install Node with Volta
+volta install node
 
 echo "ℹ️ Node installed: $(node --version)"
 echo "ℹ️ NPM installed: $(npm --version)"
@@ -54,20 +56,21 @@ fi
 
 mkdir -p "${HOME}/.config/nvim"
 
-ln -sf "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
-ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
-ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -sf "${HOME}/dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+ln -sf "${HOME}/.dotfiles/.zshrc" "${HOME}/.zshrc"
+ln -s "${HOME}/.dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
+ln -sf "${HOME}/.dotfiles/.config/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
 echo "✅ Configuring bat"
 mkdir -p "${HOME}/.config/bat/themes"
-ln -sf "${HOME}/dotfiles/.config/bat/config" "${HOME}/.config/bat/config"
+ln -sf "${HOME}/.dotfiles/.config/bat/config" "${HOME}/.config/bat/config"
 bat cache --build
 
 echo "✅ Configuring zsh"
-git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:~/.oh-my-zsh/custom}/plugins/evalcache
+ln -sf "${HOME}/.dotfiles/.oh-my-zsh/custom/themes/crush.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/crush.zsh-theme"
+git clone https://github.com/mroth/evalcache $HOME/.oh-my-zsh/custom/plugins/evalcache
 
 echo "✅ Configuring tmux"
-ln -sf "${HOME}/dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
+ln -sf "${HOME}/.dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
