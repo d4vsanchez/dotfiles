@@ -12,8 +12,8 @@ call plug#begin('~/.vim/plugged')
     " Set the file's root directory (the one with .git) as cwd
     Plug 'airblade/vim-rooter'
 
-    " This is the theme of my preference: Material Darker.
-    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    " This is the theme of my preference.
+    Plug 'joshdick/onedark.vim'
     Plug 'sheerun/vim-polyglot'
 
     " This is a plugin to support EditorConfig
@@ -38,9 +38,7 @@ call plug#begin('~/.vim/plugged')
     " Add Git features to Vim
     Plug 'tpope/vim-fugitive'
 
-    " Adds a bottom bar with information
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " Use comma to move between panes
@@ -74,9 +72,8 @@ endif
 
 " Activate the Material Darker theme
 syntax on
-let g:material_theme_style = 'darker'
-let g:material_terminal_italics = 1
-colorscheme material
+let g:onedark_terminal_italics = 1
+colorscheme onedark
 
 " Use spaces instead of tabs, always
 " tabstop -> The width of a tab character measured in spaces.
@@ -151,9 +148,3 @@ nnoremap <silent> <Leader>p :Files<CR>
 nnoremap <silent> <Leader>P :GitFiles<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 
-" =========================
-" Vim Airline Configuration
-" =========================
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
