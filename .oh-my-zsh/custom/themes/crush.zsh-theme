@@ -1,11 +1,3 @@
-# time
-function real_time() {
-    local color="%{$fg_no_bold[cyan]%}";                    # color in PROMPT need format in %{XXX%} which is not same with echo
-    local time="[$(date +%H:%M:%S)]";
-    local color_reset="%{$reset_color%}";
-    echo "${color}${time}${color_reset}";
-}
-
 # directory
 function directory() {
     local color="%{$fg_no_bold[cyan]%}";
@@ -73,18 +65,5 @@ precmd() {
 # set option
 setopt PROMPT_SUBST;
 
-# timer
-#REF: https://stackoverflow.com/questions/26526175/zsh-menu-completion-causes-problems-after-zle-reset-prompt
-TMOUT=1;
-TRAPALRM() {
-    # $(git_prompt_info) cost too much time which will raise stutters when inputting. so we need to disable it in this occurence.
-    # if [ "$WIDGET" != "expand-or-complete" ] && [ "$WIDGET" != "self-insert" ] && [ "$WIDGET" != "backward-delete-char" ]; then
-    # black list will not enum it completely. even some pipe broken will appear.
-    # so we just put a white list here.
-    if [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; then
-        zle reset-prompt;
-    fi
-}
-
 # prompt
-PROMPT='$(real_time) $(directory) $(git_status)$(command_status) ';
+PROMPT='$(directory) $(git_status)$(command_status) ';
