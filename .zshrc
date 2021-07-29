@@ -1,10 +1,7 @@
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="crush"
@@ -14,6 +11,7 @@ plugins=(evalcache git git-extras node npm)
 source $ZSH/oh-my-zsh.sh
 
 _evalcache rbenv init -
+eval "$(pyenv init --path)"
 
 export EDITOR='nvim'
 export LANG=en_US.UTF-8
