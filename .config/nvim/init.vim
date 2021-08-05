@@ -1,3 +1,16 @@
+" Set compatibility to Vim only
+set nocompatible
+set nolist
+set rnu
+" Helps force plug-ins to load correctly when it is turned back on below.
+filetype off
+
+" For plug-ins to load correctly
+filetype plugin indent on
+
+" Turn off modelines
+set modelines=0
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -39,6 +52,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
 
     Plug 'Yggdroot/indentLine'
+
+    Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " Use comma to move between panes
@@ -63,6 +79,18 @@ set backspace=indent,eol,start
 
 set number
 
+" Display 5 lines above/below the cursor when scrolling with a mouse
+set scrolloff=5
+" Speed up scrolling in Vim
+set ttyfast
+
+" Highlight matching pairs of brackets. Use the '%' character to jump between
+" them
+set matchpairs+=<:>
+
+" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
+set viminfo='100,<9999,s100
+
 " Use 24-bit (true-color) mode in Vim when outside tmux.
 if (empty($TMUX))
   if (has("termguicolors"))
@@ -82,7 +110,15 @@ colorscheme onedark
 "                at the given width
 " shiftwidth -> The size of an indent measured in spaces.
 " expandtab -> Will make the tab key to insert spaces, like a normal person.
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set textwidth=79
+set formatoptions=tcqn1
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+
+" Automatically wrap text that extends beyond the screen length
+set wrap
+
+" Prevent Vim from inserting comment leader after hitting <Enter>
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
 " ==========================
 " EditorConfig Configuration
