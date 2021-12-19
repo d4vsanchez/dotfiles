@@ -1,17 +1,19 @@
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.pyenv/bin:$PATH"
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="crush"
 
-plugins=(evalcache git git-extras node npm)
+plugins=(git git-extras node npm direnv)
 
 source $ZSH/oh-my-zsh.sh
 
-_evalcache rbenv init -
 eval "$(pyenv init --path)"
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export EDITOR='nvim'
 export LANG=en_US.UTF-8
@@ -30,7 +32,6 @@ alias gal="git add --all"
 alias ga="git commit --amend --reuse-messsage=HEAD"
 
 alias vim="nvim"
-alias ssh-keygen="ssh-keygen -t ed25519"
 alias free="free -h"
 alias df="df -h"
 alias ipinfo="curl ipinfo.io"
