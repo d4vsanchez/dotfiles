@@ -1,7 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Theme
-Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -83,7 +83,8 @@ let g:airline#extensions#coc#enabled = 1
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme gruvbox
+let ayucolor="mirage"
+colorscheme ayu
 
 " Relative line numbers
 set rnu
@@ -140,6 +141,7 @@ nmap <silent> <S-l> :BufferLineCycleNext<CR>
 nmap <silent> <S-j> :BufferLineMovePrev<CR>
 nmap <silent> <S-k> :BufferLineMoveNext<CR>
 nmap <silent> <C-t> :tabnew<CR>
+nmap <silent> <C-w> :tabclose<CR>
 nnoremap <silent> gb :BufferLinePick<CR>
 
 " Split navigation
@@ -186,6 +188,12 @@ set encoding=utf-8
 
 " TextEdit might fail if hidden is not set.
 set hidden
+
+" Use spaces instead of tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 
 " Some servers have issues with backup files, see #649.
 set nobackup
