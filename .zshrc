@@ -1,21 +1,32 @@
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$HOME/.pyenv/bin:$PATH"
+export CARGO_HOME="$HOME/.cargo"
+export VOLTA_HOME="$HOME/.volta"
+export PYENV_HOME="$HOME/.pyenv"
+export POETRY_HOME="$HOME/.poetry"
+export HOMEBREW_PATH="/usr/local/bin:/usr/local/sbin"
+
+export PATH="$PATH:$CARGO_HOME/bin"
+export PATH="$PATH:$PYENV_HOME/bin"
+export PATH="$PATH:$VOLTA_HOME/bin"
+export PATH="$PATH:$POETRY_HOME/bin"
+export PATH="$PATH:$HOMEBREW_PATH"
+
+# Add PyEnv to the ZSH path
+eval "$(pyenv init --path zsh)"
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="crush"
 
-plugins=(git git-extras node npm direnv)
+plugins=(
+  git
+  git-extras
+  node
+  npm
+  direnv
+  poetry
+)
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(pyenv init --path)"
-
-# Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export EDITOR='nvim'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -30,9 +41,8 @@ alias gr="git rebase"
 alias grc="git rebase --continue"
 alias gal="git add --all"
 alias ga="git commit --amend --reuse-messsage=HEAD"
+alias gco="git checkout"
 
-alias vim="nvim"
-alias free="free -h"
 alias df="df -h"
 alias ipinfo="curl ipinfo.io"
 
@@ -43,3 +53,8 @@ alias ipinfo="curl ipinfo.io"
 [[ -x "$(command -v bat)" ]] && alias cat="bat"
 [[ -x "$(command -v sd)" ]] && alias sed="sd"
 [[ -x "$(command -v exa)" ]] && alias ls="exa"
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND="rg --files -g '!{Library,node_modules,.git,.svn,.hg,*.map,.idea,.vscode,.sass-cache,build,Pictures}'"
+  export FZF_DEFAULT_OPTS="-m --height 50% --border"
+fi
