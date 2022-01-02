@@ -27,6 +27,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+export EDITOR="nvim"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -43,6 +44,7 @@ alias gal="git add --all"
 alias ga="git commit --amend --reuse-messsage=HEAD"
 alias gco="git checkout"
 
+alias vim="nvim"
 alias df="df -h"
 alias ipinfo="curl ipinfo.io"
 
