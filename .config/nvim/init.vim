@@ -65,8 +65,8 @@ set splitright
 " When splitting horizontally, send the split to the bottom
 set splitbelow
 
-" Show line numbers (Absolute mode)
-set number
+" Show line numbers (Relative mode)
+set rnu
 
 " Hightlight the current line number that is selected
 set cursorline
@@ -117,6 +117,9 @@ set ignorecase
 
 " Set font
 set guifont=Hack_Nerd_Font:h13
+
+" Prevent modifying the terminal cursor style
+set guicursor=
 
 " ===================
 " Theme Configuration
@@ -315,3 +318,9 @@ highlight NvimTreeGitDirty guifg=red
 highlight NvimTreeOpenedFolderName guifg=fg0
 highlight NvimTreeEmptyFolderName guifg=fg0
 highlight NvimTreeIndentMarker guifg=orange
+
+" =============
+" Terminal Mode
+" =============
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+nnoremap <silent> <leader>tt :new<CR>:terminal<CR>
