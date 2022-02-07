@@ -1,33 +1,26 @@
 export CARGO_HOME="$HOME/.cargo"
-export VOLTA_HOME="$HOME/.volta"
-export PYENV_HOME="$HOME/.pyenv"
 export POETRY_HOME="$HOME/.poetry"
 export HOMEBREW_PATH="/usr/local/bin:/usr/local/sbin"
 
 export PATH="$PATH:$CARGO_HOME/bin"
-export PATH="$PATH:$PYENV_HOME/bin"
-export PATH="$PATH:$VOLTA_HOME/bin"
 export PATH="$PATH:$POETRY_HOME/bin"
 export PATH="$PATH:$HOMEBREW_PATH"
 
-# Add PyEnv to the ZSH path
-eval "$(pyenv init --path zsh)"
-
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="crush"
+ZSH_THEME="lambda"
 
 plugins=(
   git
-  git-extras
-  node
   npm
+  asdf
+  node
   direnv
   poetry
+  git-extras
 )
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR="nvim"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
