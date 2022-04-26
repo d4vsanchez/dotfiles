@@ -1,9 +1,11 @@
 export CARGO_HOME="$HOME/.cargo"
 export POETRY_HOME="$HOME/.poetry"
 export HOMEBREW_PATH="/usr/local/bin:/usr/local/sbin"
+export LOCAL_PATH="$HOME/.local"
 
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$POETRY_HOME/bin"
+export PATH="$PATH:$LOCAL_PATH/bin"
 export PATH="$PATH:$HOMEBREW_PATH"
 
 export ZSH=$HOME/.oh-my-zsh
