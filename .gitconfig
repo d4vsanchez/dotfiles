@@ -18,8 +18,12 @@
   default = current
 
 [core]
-  pager = delta --theme="gruvbox"
+  pager = delta 
   excludesfile = /home/d4vsanchez/.gitignore_global
+
+[delta]
+  navigate = true
+  theme = 'gruvbox'
 
 [interactive]
   diffFilter = delta --color-only
