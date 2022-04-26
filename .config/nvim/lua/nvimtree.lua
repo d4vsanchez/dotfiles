@@ -89,3 +89,4 @@ g.nvim_tree_bindings = {
    { key = "q", cb = tree_cb "close" },
    { key = "g?", cb = tree_cb "toggle_help" },
 }
+

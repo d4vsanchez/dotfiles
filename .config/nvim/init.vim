@@ -6,17 +6,19 @@ endif
 
 call plug#begin(stdpath('data') . '/plugged')
 
-  " Theme
+  " Theme: OneDark
+  " Plug 'joshdick/onedark.vim'
+  " Theme: Gruvbox Dark
   Plug 'morhetz/gruvbox'
-
-  " Airline
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
 
   " Language packs
   Plug 'sheerun/vim-polyglot'
 
-  " Linting/Language Servers/Autocomplete
+  " Vim Airline
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " Linting/Language servers/Autocomplete
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " Fuzzy finder
@@ -41,22 +43,38 @@ call plug#begin(stdpath('data') . '/plugged')
   " Autoclose brackets
   Plug 'Raimondi/delimitMate'
 
-  " File explorer (Check previous config)
+  " File explorer
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
 
-  " Git
-  Plug 'tpope/vim-fugitive'
+  " Multiple cursors
+  Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
-lua << EOF
-require('nvim-web-devicons')
-require('nvimtree')
-EOF
+" Use spaces instead of tabs
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
+" Use 24-bit (true-color) mode in Neovim when outside Tmux
+if (empty($TMUX))
+  if (has('nvim'))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has('termguicolors'))
+    set termguicolors
+  endif
+endif
+
+syntax on
+set background=dark
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
 
 " Clipboard configuration
-" Use system's clipboard for Vim (+ register)
+" Use system's clipboard for Vim 
 set clipboard=unnamedplus
 
 " Splits
@@ -65,10 +83,10 @@ set splitright
 " When splitting horizontally, send the split to the bottom
 set splitbelow
 
-" Show line numbers (Relative mode)
+" Show the line numbers
 set rnu
 
-" Hightlight the current line number that is selected
+" Highlight current line number that is selected
 set cursorline
 set cursorlineopt=number
 
@@ -76,20 +94,17 @@ set cursorlineopt=number
 set list
 set listchars=tab:→\ ,trail:·,extends:⋯,precedes:⋯,nbsp:~
 
-" Use spaces instead of tabs
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-
 " Do not wrap text overflowing the window width
 set nowrap
 
 " Fix backspace behavior in macOS
 set backspace=indent,eol,start
 
+" Prevent comments from being auto-inserted when pressing O
+autocmd FileType * setlocal formatoptions-=c formatoptions-=o
+
 " Set comma (,) as the leader key
-let mapleader = ","
+let mapleader=','
 
 " Split navigation mappings
 nnoremap <C-h> <C-w><C-h>
@@ -97,72 +112,64 @@ nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
 
-" Clear search buffer when pressing doubl-Esc
+" Clear search buffer when pressing double-Esc 
 nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
 
 " Remove backup files
 set nobackup
 set nowritebackup
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/becoe resolved
-if has("nvim-0.5.0") || has("patch-8.1.1564")
+" Always show signcolumn, otherwise it will shift the text each time
+" diagnostics appear/become resolved
+if has('nvim-0.5.0') || has('patch-8.1.1564')
   set signcolumn=number
 else
   set signcolumn=yes
 endif
 
-" Ignore case in search
+" Ignore casing in search
 set ignorecase
 
 " Set font
-set guifont=Hack_Nerd_Font:h13
+set guifont=Fira_Code:h13
 
-" Prevent modifying the terminal cursor style
+" Prevent modifying the terminal cursor styke
 set guicursor=
 
-" ===================
-" Theme Configuration
-" ===================
-colorscheme gruvbox
-set background=dark
-
 " =====================
-" Airline Configuration
+" Airline configuration
 " =====================
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#coc#enabled = 1
-let g:airline_theme='gruvbox'
+let g:airline#extensions#coc#enbled = 1
+let g:airline_theme='onedark'
 
 " =====================
-" Argwrap Configuration
+" Argwrap configuration
 " =====================
 
 " Wrap arguments when pressing <Leader>a
 nnoremap <silent> <Leader>a :ArgWrap<CR>
-" As a JS-guy, I want padding in my literal objects
-let g:argwrap_padded_braces = '{'
 
 " =================
-" CoC Configuration
+" CoC configuration
 " =================
 
 " Set internal encoding of Vim
 set encoding=utf-8
 
-" TextEdit might fail if hidden is not set.
+" TextEdit might fail if hidden is not set
 set hidden
 
-" Give more space for displaying messages.
+" Give more space for displaying messages
 set cmdheight=2
 
-" Having longer updatetime leads to delays and poor UX
+" Having longer update time leads to delay and poor UX
 set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|
 set shortmess+=c
 
-" Use tab for trigger completion with characters ahead and navigate.
+" Use tab to trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -298,7 +305,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Prettier Configuration
 " ======================
 let g:prettier#exec_cmd_async = 1
-let g:prettier#autoformat_require_pragme = 0
+let g:prettier#autoformat_require_pragma = 0
 let g:prettier#autoformar_config_present = 1
 
 " =======================
@@ -319,8 +326,3 @@ highlight NvimTreeOpenedFolderName guifg=fg0
 highlight NvimTreeEmptyFolderName guifg=fg0
 highlight NvimTreeIndentMarker guifg=orange
 
-" =============
-" Terminal Mode
-" =============
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-nnoremap <silent> <leader>tt :new<CR>:terminal<CR>
