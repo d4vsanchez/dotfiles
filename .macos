@@ -24,44 +24,32 @@ echo "✅ Installing Homebrew"
 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "✅ Installing tools"
-brew install git tig watchman tree zsh neovim tmux cmake direnv jq pyenv rbenv wget
+brew install git tig watchman tree zsh neovim tmux cmake direnv jq wget
 
 echo "✅ Installing Rust coreutils alternatives"
 brew install ripgrep bat bottom sd exa fd git-delta
 
 echo "✅ Intalling Dev Fonts"
 brew tap homebrew/cask-fonts
-brew install font-hack font-jetbrains-mono font-source-code-pro
-
-echo "✅ Installing NodeJS (using Volta)"
-export VOLTA_HOME=$HOME/.volta
-export PATH="$PATH:$VOLTA_HOME/bin"
-curl https://get.volta.sh | bash
-volta install node
-
-echo "ℹ️ Node installed: $(node --version)"
-echo "ℹ️ NPM installed: $(npm --version)"
-
-echo "✅ Installing a few global npm packages"
-volta install --quiet yarn tldr vercel castnow ts-node
+brew install --cask font-sauce-code-pro-nerd-font
 
 echo "✅ Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 
 echo "✅ Installing apps with Brew cask"
 brew install --cask \
-  firefox \
-  brave-browser \
-  visual-studio-code \
   1password \
-  vlc \
   discord \
-  keka \
-  slack \
   docker \
-  notion \
-  telegram \
+  firefox \
+  keka \
   raycast \
+  rectangle \
+  slack \
+  spotify \
+  telegram \
+  visual-studio-code \
+  vlc \
   zoom
 
 echo "✅ Cloning dotfiles"
@@ -75,6 +63,29 @@ ln -s "${HOME}/.dotfiles/.gitconfig" "${HOME}/.gitconfig"
 
 source "${HOME}/.zshrc"
 
+# Install asdf
+echo "✅ Installing ASDF"
+brew install asdf
+
+# Configure asdf tools
+echo "🛠 Configuring asdf tool versions"
+ln -s "${HOME}/.dotfiles/.tool-versions" "${HOME}/.tool-versions"
+
+# Install asdf tools
+echo "✅ Installing asdf tools"
+asdf install
+
+export PATH=$PATH:$HOME/.asdf/shims
+
+echo "ℹ️ Node installed: $(node --version)"
+echo "ℹ️ NPM installed: $(npm --version)"
+
+echo "✅ Installing a few global npm packages"
+npm install --quiet npm yarn
+
+echo "ℹ️ Python installed: $(python --version)"
+pip install -U pip
+
 echo "✅ Configuring bat"
 mkdir -p "${HOME}/.config/bat/themes"
 ln -sf "${HOME}/.dotfiles/.config/bat/config" "${HOME}/.config/bat/config"
@@ -86,11 +97,6 @@ git clone https://github.com/mroth/evalcache $HOME/.oh-my-zsh/custom/plugins/eva
 
 echo "✅ Configuring tmux"
 ln -sf "${HOME}/.dotfiles/.tmux.conf" "${HOME}/.tmux.conf"
-
-echo "✅ Configure Python via PyEnv"
-pyenv install -s 3.9.7
-pyenv global 3.9.7
-pyenv exec pip install -U pip
 
 echo "✅ Configure Poetry"
 curl -sSL https://install.python-poetry.org | python3 -
