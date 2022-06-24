@@ -1,6 +1,11 @@
 " Set space as the leader key
 map , <Leader>
 
+" ==============
+" Extra Bindings
+" ==============
+nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
+
 " =========================
 " Split Navigation Mappings
 " =========================
