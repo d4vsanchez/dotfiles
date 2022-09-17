@@ -1,0 +1,21 @@
+[user]
+  name = David Sánchez
+  email = d4vsanchez@gmail.com
+
+[pull]
+  rebase = true
+
+[branch]
+  autosetuprebase = always
+
+[push]
+  default = current
+
+[core]
+  excludesfile = /home/d4vsanchez/.gitignore_global
+
+[delta]
+  navigate = true
+
+[init]
+  defaultBranch = main
