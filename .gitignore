@@ -1,0 +1,2 @@
+# Ignore the build of ZSH
+dotfiles/shell/.zshrc
