@@ -1,0 +1,10 @@
+# Comment
+zsh
+zsh-syntax-highlighting
+fzf
+git
+wget
+jq
+pure
+tig
+xz
