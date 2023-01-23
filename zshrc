@@ -28,9 +28,8 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Set default editor
-export EDITOR="lvim"
-alias vim="lvim"
-alias nvim="lvim"
+export EDITOR="nvim"
+alias vim="nvim"
 
 # Initialize starship prompt
 eval "$(starship init zsh)"
