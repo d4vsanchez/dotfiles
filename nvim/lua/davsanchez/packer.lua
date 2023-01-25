@@ -41,6 +41,16 @@ return require("packer").startup(function(use)
     }
   }
 
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  })
+
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons" }
+  })
+
   use({ "numToStr/Comment.nvim" })
 
   use({ "editorconfig/editorconfig-vim" })
