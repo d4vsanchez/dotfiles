@@ -1,4 +1,3 @@
-# Add Cargo
 export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation
@@ -20,7 +19,7 @@ zstyle ":omz:update" frequency 7
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Plugin configuration
-plugins=(asdf dotenv gitfast poetry ripgrep rust)
+plugins=(dotenv gitfast poetry ripgrep rust)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,3 +67,7 @@ alias gal="git add --all"
 if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
+
+eval "$(fnm env --use-on-cd)"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
