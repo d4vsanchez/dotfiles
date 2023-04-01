@@ -55,4 +55,10 @@ return require("packer").startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
+
+  -- Statusline
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "nvim-tree/nvim-web-devicons", opt = true }
+  }
 end)
