@@ -3,6 +3,7 @@ vim.opt.backup = false
 vim.opt.errorbells = false
 vim.opt.swapfile = false
 vim.opt.signcolumn = "yes"
+vim.opt.relativenumber = true
 
 -- Use spaces instead of tabs
 vim.o.expandtab = true
