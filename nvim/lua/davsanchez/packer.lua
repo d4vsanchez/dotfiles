@@ -5,7 +5,11 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- Colorscheme
-  use({ "catppuccin/nvim", as = "catppuccin" })
+  use({
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+  })
 
   -- File explorer
   use({
@@ -61,4 +65,7 @@ return require("packer").startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "nvim-tree/nvim-web-devicons", opt = true }
   }
+
+  -- Blank chars indicators
+  use({ "lukas-reineke/indent-blankline.nvim" })
 end)
