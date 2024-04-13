@@ -1,0 +1,21 @@
+format = """
+$directory\
+$git_branch\
+$character"""
+
+[character]
+success_symbol = "[~>](bold fg:#9ccfd8) "
+error_symbol = "[~>](bold fg:#eb6f92) "
+
+[directory]
+truncation_length = 3
+fish_style_pwd_dir_length = 1
+format = "[$read_only]($read_only_style)[$path]($style) "
+style = "bold fg:#f6c177"
+read_only = "􀎡 "
+read_only_style = "fg:#eb6f92"
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = "\uf418 "
+style = "bold fg:#c4a7e7"
