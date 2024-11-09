@@ -21,6 +21,9 @@ config.font = wezterm.font({ family = "SauceCodePro Nerd Font Mono" })
 -- Choose a font size
 config.font_size = 12
 
+-- Set the default cursor style to a Vertical Bar
+config.default_cursor_style = "SteadyBar"
+
 -- Removes the title bar, leaving the tab bar. Allows resizing the window
 config.window_decorations = "RESIZE"
 
